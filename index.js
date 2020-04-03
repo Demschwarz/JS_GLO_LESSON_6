@@ -2,12 +2,22 @@
 let isNum = function(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
+
+let input = function() {
+    let a = +prompt('Введите число');
+    console.log('a: ', a);
+    if (!isNum(a)) {
+        input();
+    }
+    else return a;
+}
+
 function game() {
-    let tries = 10;
+    let tries = 10; // количество попыток
+
     let a = ' ';
-    let number = Math.floor(Math.random() * 100) + 1;
-    console.log('number: ', number);
-    game_iter(a, tries);
+    
+    let number = Math.floor(Math.random() * 100) + 1; //генерация случайного числа
     function game_iter(a, n) {
         if (n == 0) {
             let responce_lose = confirm('К сожалению, Вы проиграли. Не хотите сыграть ещё?');
@@ -19,10 +29,11 @@ function game() {
         }
         }
         let playerNumber = +(prompt('Угадай число от 1 до 100' + a + ', осталось попыток: ' + n).trim());
-        while(!isNum(playerNumber)){
-            playerNumber = +prompt('Введите число');
+        if (!isNum(playerNumber)) {
+            playerNumber = input();
         }
-        if (playerNumber == 0) {
+
+        if (playerNumber === 0) {
             return;
         }
         if (number === playerNumber) {
@@ -37,17 +48,21 @@ function game() {
         else {
             if (number > playerNumber) {
                 game_iter('   Ваше число было меньше загаданного', n - 1);
-                while(!isNum(playerNumber)){
-                    playerNumber = +prompt('Введите число');
+                if (!isNum(playerNumber)) {
+                    playerNumber = input();
                 }
             }
             else{
                 game_iter('   Ваше число было больше загаданного', n - 1);
-                while(!isNum(playerNumber)){
-                    playerNumber = +prompt('Введите число');
+                if (!isNum(playerNumber)) {
+                    playerNumber = input();
                 }
             }
         }
     }
+    
+    game_iter(a, tries);
 }
+
+
 game()
