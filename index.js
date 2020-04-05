@@ -79,6 +79,6 @@ function game() {
 let number = generate();
 game();
 return;
-}
+} 
 
 start();
