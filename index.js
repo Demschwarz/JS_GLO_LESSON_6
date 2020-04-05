@@ -12,17 +12,27 @@ let input = function() {
     else return a;
 }
 
+let generate = function() {
+    return Math.floor(Math.random() * 100) + 1; //генерация случайного числа
+}
+
+
+let start = function() {
+    let a;
+
 function game() {
     let tries = 10; // количество попыток
 
-    let a = ' ';
+    a = ' ';
     
-    let number = Math.floor(Math.random() * 100) + 1; //генерация случайного числа
+    // let number = Math.floor(Math.random() * 100) + 1; //генерация случайного числа
+    console.dir(game);
     function game_iter(a, n) {
+        
         if (n == 0) {
             let responce_lose = confirm('К сожалению, Вы проиграли. Не хотите сыграть ещё?');
         if (responce_lose == true) {
-            game();
+            start();
         }
         else {
             return;
@@ -38,11 +48,12 @@ function game() {
         }
         if (number === playerNumber) {
             let responce_vict = confirm('Поздравляем! Вы угадали число! Хотите продолжить?');
+            // console.dir(game_iter());
             if (responce_vict == false) {
                 return;
             }
             else {
-                game();
+                start();
             }
         }
         else {
@@ -60,9 +71,14 @@ function game() {
             }
         }
     }
-    
+
     game_iter(a, tries);
+    return;
 }
 
+let number = generate();
+game();
+return;
+}
 
-game()
+start();
